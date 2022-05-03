@@ -13,7 +13,9 @@ import java.util.Scanner;
 
 public class RecBinarySearch {
 
-    public 
+    public static int binarySearch(int userNumInt, int[] array) {
+        
+    }
     
     public static void main(String[] args) throws IOException {
 
