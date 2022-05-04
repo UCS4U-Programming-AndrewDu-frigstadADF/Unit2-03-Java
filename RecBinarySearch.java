@@ -13,10 +13,10 @@ import java.util.Scanner;
 
 public class RecBinarySearch {
 
-    public static int binarySearch(int userNumInt, int[] array) {
-        
+    public static int binarySearch(int userNumInt, int[] array, int mid, int side) {
+
     }
-    
+
     public static void main(String[] args) throws IOException {
 
         // declaring variables
