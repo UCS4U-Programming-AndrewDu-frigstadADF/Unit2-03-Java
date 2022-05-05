@@ -13,8 +13,22 @@ import java.util.Scanner;
 
 public class RecBinarySearch {
 
-    public static int binarySearch(int userNumInt, int[] array, int mid, int side) {
+    public static int binarySearch(int userNumInt, int[] num, int l, int r) {
 
+        if (r >= l && l <= num.length - 1) {
+            int middle = l + (r - l) / 2;
+
+            if (num[middle] == userNumInt) {
+                return middle;
+            }
+
+            if (num[middle] > userNumInt) {
+                return binarySearch(userNumInt, num, l, middle - 1);
+            } else {
+                return binarySearch(userNumInt, num, middle + 1, r);
+            }
+        }
+        return -1;
     }
 
     public static void main(String[] args) throws IOException {
@@ -66,10 +80,18 @@ public class RecBinarySearch {
             userNumInt = -1;
         }
 
-        if (userNumInt = -1) {
+        if (userNumInt == -1) {
             System.out.println("Input a positive number");
-        } else {
+        }
 
+        int n = num.length;
+
+        int result = binarySearch(0, num, n - 1, userNumInt);
+
+        if (result != -1) {
+            System.out.println(result);
+        } else {
+            System.out.println("That number is not in the list");
         }
     }
 
