@@ -10,12 +10,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class RecBinarySearch {
 
     public static int binarySearch(int userNumInt, int[] num, int l, int r) {
 
         if (r >= l && l <= num.length - 1) {
+
             int middle = l + (r - l) / 2;
 
             if (num[middle] == userNumInt) {
@@ -24,9 +26,10 @@ public class RecBinarySearch {
 
             if (num[middle] > userNumInt) {
                 return binarySearch(userNumInt, num, l, middle - 1);
-            } else {
-                return binarySearch(userNumInt, num, middle + 1, r);
             }
+
+            return binarySearch(userNumInt, num, middle + 1, r);
+
         }
         return -1;
     }
@@ -49,8 +52,6 @@ public class RecBinarySearch {
             }
         }
 
-        System.out.println(numberTxtList);
-
         int[] num = new int[numberTxtList.size()];
         for (int arrayInt = 0; arrayInt < numberTxtList.size(); arrayInt = arrayInt + 1) {
 
@@ -67,6 +68,9 @@ public class RecBinarySearch {
             num[arrayInt] = checkingInt;
         }
 
+        Arrays.sort(num);
+        int n = num.length;
+
         if (checkingInt == -1) {
             System.out.println("invalid file");
         }
@@ -80,18 +84,18 @@ public class RecBinarySearch {
             userNumInt = -1;
         }
 
-        if (userNumInt == -1) {
+        if (userNumInt <= -1) {
             System.out.println("Input a positive number");
-        }
-
-        int n = num.length;
-
-        int result = binarySearch(0, num, n - 1, userNumInt);
-
-        if (result != -1) {
-            System.out.println(result);
         } else {
-            System.out.println("That number is not in the list");
+
+            int result = binarySearch(0, num, n - 1, userNumInt);
+
+            if (result == -1) {
+                System.out.println("That number is not in the list");
+            } else {
+                System.out.println("Element found in index " + result);
+            }
+
         }
     }
 
