@@ -16,22 +16,26 @@ public class RecBinarySearch {
 
     public static int binarySearch(int userNumInt, int[] num, int l, int r) {
 
-        if (r >= l && l <= num.length - 1) {
+        int mid = ((r - l) / 2) + l;
+        System.out.println(l + " " + mid + " " + r + " | " + userNumInt + " " + num[mid]);
 
-            int middle = l + (r - l) / 2;
+        if (r < l) {
 
-            if (num[middle] == userNumInt) {
-                return middle;
-            }
+            // return fail
+            return -1;
 
-            if (num[middle] > userNumInt) {
-                return binarySearch(userNumInt, num, l, middle - 1);
-            }
+            // if number is in the middle then return the middle number
+        } else if (num[mid] == userNumInt) {
+            return mid;
 
-            return binarySearch(userNumInt, num, middle + 1, r);
+            // if the number is smaller than the middle number then go to the left
+        } else if (num[mid] > userNumInt) {
+            return binarySearch(userNumInt, num, l, mid - 1);
 
+            // if the number is bigger than the middle than go to the right
+        } else {
+            return binarySearch(userNumInt, num, mid + 1, r);
         }
-        return -1;
     }
 
     public static void main(String[] args) throws IOException {
@@ -68,16 +72,21 @@ public class RecBinarySearch {
             num[arrayInt] = checkingInt;
         }
 
+        // sort the array
         Arrays.sort(num);
         int n = num.length;
 
+        // check the file
         if (checkingInt == -1) {
             System.out.println("invalid file");
         }
         Scanner myObj = new Scanner(System.in);
+
+        // get the number to search
         System.out.println("What number do you want to find?");
         String userNum = myObj.nextLine();
 
+        // make sure the user's number is positive
         try {
             userNumInt = Integer.parseInt(userNum);
         } catch (NumberFormatException e) {
@@ -88,7 +97,9 @@ public class RecBinarySearch {
             System.out.println("Input a positive number");
         } else {
 
-            int result = binarySearch(0, num, n - 1, userNumInt);
+            // call and print the binary search
+            int result = binarySearch(userNumInt, num, 0, n);
+            System.out.println(result);
 
             if (result == -1) {
                 System.out.println("That number is not in the list");
